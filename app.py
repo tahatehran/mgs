@@ -27,8 +27,7 @@ def get_historical_prices(currency='USD', days=30):
     data = response.json()
     if 'bpi' in data:
         historical_prices = pd.Series(data['bpi']).sort_index()
-        df = pd.DataFrame({'price': historical_prices.values})
-        df['date'] = pd.to_datetime(historical_prices.index)
+        df = pd.DataFrame({'price': historical_prices.values, 'date': historical_prices.index})
         return df.tail(days)
     else:
         return pd.DataFrame()
@@ -95,4 +94,4 @@ st.write('Sell Signals:', df['sell_signal'].sum())
 
 # Display historical Bitcoin price chart
 st.subheader('Historical Bitcoin Price')
-st.line_chart(historical_df['price'], x='date')
+st.line_chart(historical_df, x='date')
