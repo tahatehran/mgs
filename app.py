@@ -1,8 +1,17 @@
-import streamlit as st
+    import streamlit as st
 import requests
 import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
+import os
+
+# Install Matplotlib if not already installed
+try:
+    import matplotlib
+except ImportError:
+    st.write("Installing Matplotlib...")
+    os.system("pip install matplotlib")
+    import matplotlib.pyplot as plt
 
 # Function to get current Bitcoin price
 @st.cache_data
