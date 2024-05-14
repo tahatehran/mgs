@@ -2,16 +2,6 @@
 import requests
 import pandas as pd
 from datetime import datetime
-import matplotlib.pyplot as plt
-import os
-
-# Install Matplotlib if not already installed
-try:
-    import matplotlib
-except ImportError:
-    st.write("Installing Matplotlib...")
-    os.system("pip install matplotlib")
-    import matplotlib.pyplot as plt
 
 # Function to get current Bitcoin price
 @st.cache_data
@@ -105,9 +95,4 @@ st.write('Sell Signals:', df['sell_signal'].sum())
 
 # Display historical Bitcoin price chart
 st.subheader('Historical Bitcoin Price')
-fig, ax = plt.subplots(figsize=(12, 6))
-ax.plot(historical_df['date'], historical_df['price'])
-ax.set_xlabel('Date')
-ax.set_ylabel(f'Price ({currency})')
-ax.set_title('Bitcoin Price')
-st.pyplot(fig)
+st.line_chart(historical_df['price'], x='date')
